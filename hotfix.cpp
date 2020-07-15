@@ -10,8 +10,8 @@
 
 void usage()
 {
-	printf("8 ./hottool hotfix 1 pid elfname symname soname newsymname\n");
-	printf("8 ./hottool hotfix 2 pid srcsoname srcsymname dstsoname dtssymname\n");
+	printf("1 ./hottool hotfix 1 pid elfname symname soname newsymname\n");
+	printf("2 ./hottool hotfix 2 pid srcsoname srcsymname dstsoname dtssymname\n");
 }
 
 int hottool_hotfix(pid_t pid, int argc, char *argv[], void *&back_got_plt, void *&back_addr)
