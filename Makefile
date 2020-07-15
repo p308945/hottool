@@ -1,3 +1,4 @@
+hottool: hotfix hotfind
 
 hotfix: crossprocess.o find_sym_addr.o hook.o hotfix.o
     g++ hotfix.o crossprocess.o find_sym_addr.o hook.o -g -Wl,-export-dynamic -o hottool
