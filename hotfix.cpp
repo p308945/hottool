@@ -92,7 +92,6 @@ int hottool_hotfix(pid_t pid, int argc, char *argv[], void *&back_got_plt, void 
 		return -1;
 	}
 
-		//printf("8 ./hottool hotfix 1 pid elfname symname soname newsymname\n");
 	fprintf(stderr, "%s %d, replace succ type: %s, pid :%s, srcelfname:%s, srcsymname:%s, dstelfname:%s, dstsymname:%s\n", __FUNCTION__, __LINE__, argv[2], argv[3], argv[4], argv[5], argv[6], argv[7]);
 	return 0;
 
@@ -124,7 +123,6 @@ int main(int argc, char *argv[])
 
 	if (optstr == "hotfix")
 	{
-	//	printf("./hotfix replace 1 pid elfname symname soname newsymname\n");
 		void *back_got_plt = NULL;
 		void *back_addr = NULL;
 		int ret = hottool_hotfix(pid, argc, argv, back_got_plt, back_addr);
