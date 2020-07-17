@@ -166,8 +166,10 @@ bool find_so_func_addr_by_mem(int pid, const std::string &soname, const std::str
 	Elf64_Shdr dynstrsection = sections[dynstrindex];
 
     fprintf(stderr, "%s %d %s ok get dynstr section header offset:%ld, size:%ld\n", __FUNCTION__, __LINE__, soname.c_str(), __FUNCTION__, __LINE__, dynstrsection.sh_offset, dynstrsection.sh_size);
-	char dynstr[dynstrsection.sh_size];
-	ret = cross_proc_read(pid, (char *)(startaddr + dynstrsection.sh_offset), dynstr, sizeof(dynstr));
+	//char dynstr[dynstrsection.sh_size];
+	std::string dynstr;
+	dynstr.resize(dynstrsection.sh_size);
+	ret = cross_proc_read(pid, (char *)(startaddr + dynstrsection.sh_offset), const_cast<char *>(dynstr.c_str()), dynstrsection.sh_size);
 	if (ret != 0)
 	{
         fprintf(stderr, "%s %d %s get dynstr error\n", __FUNCTION__, __LINE__, soname.c_str());
@@ -400,8 +402,10 @@ bool find_so_func_addr_by_file(int pid, const std::string &sopath, const std::st
 	fprintf(stderr, "%s %d dynsymindex:%d, sh_offset:%ld, sh_size:%ld \n", __FUNCTION__, __LINE__, dynsymindex, dynsymsection.sh_offset, dynsymsection.sh_size);
 
 	Elf64_Shdr &dynstrsection = sections[dynstrindex];
-    char dynstr[dynstrsection.sh_size];
-    memcpy(dynstr, sofileaddr + dynstrsection.sh_offset, sizeof(dynstr));
+    //char dynstr[dynstrsection.sh_size];
+	std::string dynstr;
+	dynstr.resize(dynstrsection.sh_size);
+    memcpy(const_cast<char *>(dynstr.c_str()), sofileaddr + dynstrsection.sh_offset, dynstrsection.sh_size);
 
 	fprintf(stderr, "%s %d dynstrindex:%d, sh_offset:%ld, sh_size:%ld \n", __FUNCTION__, __LINE__, dynstrindex, dynstrsection.sh_offset, dynstrsection.sh_size);
 
@@ -631,8 +635,10 @@ bool find_elf_fun_addr_by_file(int pid, const std::string &elfpath, const std::s
 	fprintf(stderr, "%s %d dynsymindex:%d, sh_offset:%ld, sh_size:%ld \n", __FUNCTION__, __LINE__, dynsymindex, dynsymsection.sh_offset, dynsymsection.sh_size);
 
 	Elf64_Shdr &dynstrsection = sections[dynstrindex];
-    char dynstr[dynstrsection.sh_size];
-    memcpy(dynstr, elffileaddr + dynstrsection.sh_offset, sizeof(dynstr));
+   // char dynstr[dynstrsection.sh_size];
+	std::string dynstr;
+	dynstr.resize(dynstrsection.sh_size);
+    memcpy(const_cast<char *>(dynstr.c_str()), elffileaddr + dynstrsection.sh_offset, dynstrsection.sh_size);
 
 	fprintf(stderr, "%s %d dynstrindex:%d, sh_offset:%ld, sh_size:%ld \n", __FUNCTION__, __LINE__, dynstrindex, dynstrsection.sh_offset, dynstrsection.sh_size);
 
@@ -835,8 +841,10 @@ bool find_so_variable_addr_by_mem(int pid, const std::string &soname, const std:
 	Elf64_Shdr dynstrsection = sections[dynstrindex];
 
     fprintf(stderr, "%s %d %s ok get dynstr section header offset:%ld, size:%ld\n", __FUNCTION__, __LINE__, soname.c_str(), __FUNCTION__, __LINE__, dynstrsection.sh_offset, dynstrsection.sh_size);
-	char dynstr[dynstrsection.sh_size];
-	ret = cross_proc_read(pid, (char *)(startaddr + dynstrsection.sh_offset), dynstr, sizeof(dynstr));
+//	char dynstr[dynstrsection.sh_size];
+	std::string dynstr;
+	dynstr.resize(dynstrsection.sh_size);
+	ret = cross_proc_read(pid, (char *)(startaddr + dynstrsection.sh_offset), const_cast<char *>(dynstr.c_str()), dynstrsection.sh_size);
 	if (ret != 0)
 	{
         fprintf(stderr, "%s %d %s get dynstr error\n", __FUNCTION__, __LINE__, soname.c_str());
@@ -1068,8 +1076,10 @@ bool find_so_variable_addr_by_file(int pid, const std::string &sopath, const std
 	fprintf(stderr, "%s %d dynsymindex:%d, sh_offset:%ld, sh_size:%ld \n", __FUNCTION__, __LINE__, dynsymindex, dynsymsection.sh_offset, dynsymsection.sh_size);
 
 	Elf64_Shdr &dynstrsection = sections[dynstrindex];
-    char dynstr[dynstrsection.sh_size];
-    memcpy(dynstr, sofileaddr + dynstrsection.sh_offset, sizeof(dynstr));
+//    char dynstr[dynstrsection.sh_size];
+	std::string dynstr;
+	dynstr.resize(dynstrsection.sh_size);
+    memcpy(const_cast<char *>(dynstr.c_str()), sofileaddr + dynstrsection.sh_offset, dynstrsection.sh_size);
 
 	fprintf(stderr, "%s %d dynstrindex:%d, sh_offset:%ld, sh_size:%ld \n", __FUNCTION__, __LINE__, dynstrindex, dynstrsection.sh_offset, dynstrsection.sh_size);
 
@@ -1299,8 +1309,10 @@ bool find_elf_variable_addr_by_file(int pid, const std::string &elfpath, const s
 	fprintf(stderr, "%s %d dynsymindex:%d, sh_offset:%ld, sh_size:%ld \n", __FUNCTION__, __LINE__, dynsymindex, dynsymsection.sh_offset, dynsymsection.sh_size);
 
 	Elf64_Shdr &dynstrsection = sections[dynstrindex];
-    char dynstr[dynstrsection.sh_size];
-    memcpy(dynstr, elffileaddr + dynstrsection.sh_offset, sizeof(dynstr));
+//    char dynstr[dynstrsection.sh_size];
+	std::string dynstr;
+	dynstr.resize(dynstrsection.sh_size);
+    memcpy(const_cast<char *>(dynstr.c_str()), elffileaddr + dynstrsection.sh_offset, dynstrsection.sh_size);
 
 	fprintf(stderr, "%s %d dynstrindex:%d, sh_offset:%ld, sh_size:%ld \n", __FUNCTION__, __LINE__, dynstrindex, dynstrsection.sh_offset, dynstrsection.sh_size);
 
