@@ -537,7 +537,7 @@ bool hotfix_func(pid_t pid, void *old_funcaddr, void *new_funcaddr, uint64_t &ba
 
 	int offset = (int)((uint64_t)new_funcaddr - ((uint64_t) old_funcaddr + 5));
 
-	char code[8] = {0};
+	char code[8] = {0x90};	//nop
 	code[0] = 0xE9;
 	memcpy(&code[1], &offset, sizeof(offset));
 
@@ -563,7 +563,7 @@ bool hotfix_func64(pid_t pid, void *old_funcaddr, void *new_funcaddr, char *back
 		return false;
 	}
 
-	char code[16] = {0};
+	char code[16] = {0x90};	//nop
 	//jmpq *
 	code[0] = 0xFF;
 	code[1] = 0x25;
